@@ -199,6 +199,12 @@ async function execute(message, serverQueue) {
 async function find(message, serverQueue) {
 	const args = message.content.split(" ");
 	const voiceChannel = message.member.voice.channel;
+	if (!voiceChannel){
+		console.log("Play failed (not in channel)");
+		return message.channel.send(
+			":x: You have to be in a voice channel"
+		);
+	}
 	const validLink = /(?:https?:\/\/)?(?:www\.)?youtu\.?be(?:\.com)?\/?.*(?:watch|embed)?(?:.*v=|v\/|\/)([\w\-_]+)\&?/;
 	
 	var query = args[1];
@@ -216,13 +222,19 @@ async function find(message, serverQueue) {
 		let embed = new Discord.MessageEmbed();
 		message.channel.send({
 			embed: {
-				title: "Select which song you'd like by typing its number",
+				title: "Select which song you'd like by typing its number (0 to cancel)",
 				description : titles.join("\n")
 			}
 		}).catch(err => console.log(err));
 		
-		let filter = m => (m.author.id === message.author.id) && (m.content >= 1) && (m.content <= searches.length);
+		let filter = m => (m.author.id === message.author.id) && (m.content >= 0) && (m.content <= searches.length);
 		let collected = await message.channel.awaitMessages(filter, { max: 1, time: 30000 });
+		if(collected.first().content == 0) {
+			console.log("Search has been cancelled");
+			return message.channel.send(
+			":crab: Search is cancelled :crab:"
+		);
+	}
 		let selected = searches[collected.first().content - 1];
 		
 		embed = new Discord.MessageEmbed()
