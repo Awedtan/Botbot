@@ -5,6 +5,7 @@ const ytdl = require("ytdl-core");
 const search = require("youtube-search");
 const client = new Discord.Client();
 const queue = new Map();
+var isInChannel = false;
 
 const opts = {
 	maxResults: 10,
@@ -21,25 +22,33 @@ client.once("reconnecting", () => {
 });
 
 client.once("disconnect", () => {
-	console.log("Disconnect!");
+	console.log("Disconnected!");
 });
 
 client.on("message", async message => {
+	const messageContent = message.content;
+	
 	if (message.author.bot) return;
-	if (message.content.match("bruh")) {
-		return message.channel.send({files: ["./bruh.jpg"]});
+	if (message.content.toLowerCase().match("bruh")) {
+		console.log();
+		console.log("bruh");
+		return message.channel.send({files: ["./images/bruh.jpg"]});
+	} else if (message.content.toLowerCase().match("bruh")) {
+		console.log();
+		console.log("owo");
+		return message.channel.send({files: ["./images/owo.jpg"]});
 	}
-	if (!message.content.startsWith(prefix)) return;
+	if (!messageContent.startsWith(prefix)) return;
 	
 	const serverQueue = queue.get(message.guild.id);
-	const args = message.content.split(" ");
+	const args = messageContent.split(" ");
 	console.log();
-	console.log("Received: " + message.content);
+	console.log("Received: " + messageContent);
 	opts.key = config.youtube_api;
 	
-	if (message.content === `${prefix}help`) {
+	if (messageContent === `${prefix}help`) {
 		message.channel.send(
-			`\`\`\`play [URL/search query]- Plays the specified song\nsearch - Searches for the top 10 Youtube results\nskip - Skips the next queued up song\nstop - Disconnects the bot and clears the queue\nremove [position] - Removes the song in the selected position from the queue\nqueue - Displays the currently playing song and any queued songs\nhelp - Displays this message again\`\`\``
+			`\`\`\`play [URL/search query]- Plays the specified song\nsearch - Searches for the top 10 Youtube results\nskip - Skips the next queued up song\nstop - Clears the queue of songs\nleave - Disconnects the bot from the channel\nremove [position] - Removes the song in the selected position from the queue\nqueue - Displays the currently playing song and any queued songs\nhelp - Displays this message again\`\`\``
 		);
 		return;
 	}
@@ -51,7 +60,7 @@ client.on("message", async message => {
 		);
 	}
 	
-	if(!serverQueue) {
+	if(!isInChannel) {
 		const voiceChannel = message.member.voice.channel;
 		const permissions = voiceChannel.permissionsFor(message.client.user);
 		if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
@@ -64,22 +73,22 @@ client.on("message", async message => {
 		if (args[0] === `${prefix}play`) {
 			execute(message, serverQueue, args);
 			return;
-		} else if (message.content === `${prefix}skip`) {
+		} else if (messageContent === `${prefix}skip`) {
 			console.log("Skip failed (empty queue)");
 			return message.channel.send(
 				":x: There aren't any songs playing"
 			);
-		} else if (message.content === `${prefix}stop` || message.content === `${prefix}leave`) {
+		} else if (messageContent === `${prefix}stop`) {
 			console.log("Stop failed (not in channel)");
 			return message.channel.send(
-				":x: I'm not in a voice channel"
+				":x: I'm not playing anything"
 			);
 		} else if (args[0] === `${prefix}remove`) {
 			console.log("Remove failed (empty queue)");
 			return message.channel.send(
 				":x: There aren't any songs queued up"
 			);
-		} else if (message.content === `${prefix}list` || message.content === `${prefix}queue`) {
+		} else if (messageContent === `${prefix}list` || messageContent === `${prefix}queue`) {
 			console.log("List failed (empty queue)");
 			return message.channel.send(
 				":x: There arent any songs queued up"
@@ -87,6 +96,11 @@ client.on("message", async message => {
 		} else if (args[0] === `${prefix}search` || args[0] === `${prefix}find`) {
 			find(message, serverQueue, args);
 			return;
+		} else if (messageContent === `${prefix}leave`) {
+			console.log("Leave failed (not in voice channel)");
+			return message.channel.send(
+				":x: I'm not in a voice channel"
+			);
 		} else {
 			console.log("Failed command");
 			return message.channel.send(
@@ -100,21 +114,29 @@ client.on("message", async message => {
 					opts.key = config.youtube_api;
 					execute(message, serverQueue, args);
 					return;
-				} else if (message.content === `${prefix}skip`) {
+				} else if (messageContent === `${prefix}skip`) {
 					skip(message, serverQueue);
 					return;
-				} else if (message.content === `${prefix}stop` || message.content === `${prefix}leave`) {
+				} else if (messageContent === `${prefix}stop`) {
 					stop(message, serverQueue);
 					return;
 				} else if (args[0] === `${prefix}remove`) {
 					remove(message, serverQueue, args);
 					return;
-				} else if (message.content === `${prefix}list` || message.content === `${prefix}queue`) {
+				} else if (messageContent === `${prefix}list` || messageContent === `${prefix}queue`) {
 					list(message, serverQueue);
 					return;
 				} else if (args[0] === `${prefix}search` || args[0] === `${prefix}find`) {
 					find(message, serverQueue, args);
 					return;
+				} else if (messageContent === `${prefix}leave`) {
+					queue.get(message.guild.id).voiceChannel.leave();
+					isInChannel = false;
+					queue.delete(message.guild.id);
+					console.log("Left voice channel");
+					return message.channel.send(
+						":arrow_right::door: Left voice channel"
+					);
 				} else {
 					console.log("Failed command");
 					return message.channel.send(
@@ -122,9 +144,9 @@ client.on("message", async message => {
 					);
 				}
 			} catch (err) {
-				console.log("Caught error, received command: " + message.content);
+				console.log("Caught error, received command: " + messageContent);
 				return message.channel.send(
-					":grey_question: Did you type that correctly?"
+					":pensive: Sorry, something went wrong"
 				);
 			}
 		}
@@ -133,7 +155,7 @@ client.on("message", async message => {
 
 async function execute(message, serverQueue, args) {
 	const voiceChannel = message.member.voice.channel;
-	try{
+	try {
 		if(args.length <= 1) {
 			console.log("Play failed (empty query)");
 			return message.channel.send(
@@ -246,19 +268,14 @@ async function execute(message, serverQueue, args) {
 					}
 				} else {
 					return message.channel.send(
-						":blobsad: Sorry, something went wrong"
+						":pensive: Sorry, something went wrong"
 					);
 				}
 			} else {
 				return message.channel.send(
-					":blobsad: Sorry, something went wrong"
+					":pensive: Sorry, something went wrong"
 				);
 			}
-			
-			// console.log(`Failed play`);
-			// return message.channel.send(
-			// 	":x: I'm afraid I can't play that"
-			// );
 		}
 	} catch (err) {
 		opts.key = config.backup_api;
@@ -300,6 +317,11 @@ async function find(message, serverQueue, args) {
 		
 		let filter = m => (m.author.id === message.author.id) && (m.content >= 0) && (m.content <= searches.length);
 		let collected = await message.channel.awaitMessages(filter, { max: 1, time: 30000 });
+		collector.on('end', collected => {
+			console.log("Search has been cancelled");
+			return message.channel.send(
+				":crab: Search is cancelled :crab:"
+			)});
 		if(collected.first().content == 0) {
 			console.log("Search has been cancelled");
 			return message.channel.send(
@@ -352,12 +374,12 @@ async function find(message, serverQueue, args) {
 			}
 		} else {
 			return message.channel.send(
-				":blobsad: Sorry, something went wrong"
+				":pensive: Sorry, something went wrong"
 			);
 		}
 	} else {
 		return message.channel.send(
-			":blobsad: Sorry, something went wrong"
+			":pensive: Sorry, something went wrong"
 		);
 	}
 }
@@ -382,11 +404,10 @@ function stop(message, serverQueue) {
 function play(guild, song) {
 	const serverQueue = queue.get(guild.id);
 	if (!song) {
-		serverQueue.voiceChannel.leave();
-		queue.delete(guild.id);
+		// serverQueue.voiceChannel.leave();
+		// queue.delete(guild.id);
 		return;
 	}
-
 	const dispatcher = serverQueue.connection
 		.play(ytdl(song.url))
 		.on("finish", () => {
@@ -395,6 +416,7 @@ function play(guild, song) {
 		})
 		.on("error", error => console.error(error));
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
+	isInChannel = true;
 	console.log(`Now playing ${song.title}`);
 	serverQueue.textChannel.send(
 		`:arrow_forward: Now playing **${song.title}**`
