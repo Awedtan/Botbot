@@ -2,10 +2,10 @@ const { prefix } = require("./../config.json");
 
 module.exports = {
 	name: `${prefix}stop`,
-	description: ``,
-	
-	execute(message, client){
-		try{
+	description: `\`stop\`: removes all songs from the queue`,
+
+	execute(message, client) {
+		try {
 			const serverQueue = message.client.queue.get(message.guild.id);
 			serverQueue.songs = [];
 			serverQueue.connection.dispatcher.end();
@@ -13,7 +13,7 @@ module.exports = {
 			message.channel.send(
 				":stop_button: Stopped music playback"
 			);
-		} catch(err){
+		} catch (err) {
 			console.log("Stop failure (empty queue)");
 			return message.channel.send(
 				":x: I'm not playing anything"

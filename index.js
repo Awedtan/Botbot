@@ -27,29 +27,29 @@ client.once("disconnect", () => {
 });
 
 client.on("message", async message => {
-	if(message.author.bot) return;
-	if(!message.content.startsWith(";") && client.commands.get(";image").execute(message, client)) return;
-	
-	if(message.content.startsWith(`${prefix}`)){
+	if (message.author.bot) return;
+	if (!message.content.startsWith(";") && client.commands.get(";image").execute(message, client)) return;
+
+	if (message.content.startsWith(`${prefix}`)) {
 		console.log();
 		console.log("Received: " + message.content);
-		
-		const args = message.content.split(/ +/);
+
+		const args = message.content.split(" ");
 		const commandName = args.shift().toLowerCase();
 		const command = client.commands.get(commandName);
 		client.opts.key = config.youtube_api;
-		
-		try{
+
+		try {
 			command.execute(message, client);
-		} catch(error){
+		} catch (error) {
 			console.log("Command failure");
 			return message.channel.send(
 				":grey_question: Did you type that correctly?"
 			);
 		}
 	}
-	else{
-		
+	else {
+
 	}
 });
 
