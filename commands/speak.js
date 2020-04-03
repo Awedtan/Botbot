@@ -1,5 +1,6 @@
 const { prefix } = require("./../config.json");
-const say = require('say');
+const Say = require('say').Say;
+const say = new Say('win32');
 
 module.exports = {
 	name: `${prefix}speak`,
@@ -20,13 +21,13 @@ module.exports = {
 		}
 
 		try {
-			args = message.content.split(" ");
+			args = message.content.toLowerCase().split(" ");
 			var query = args[1];
 			for (let i = 2; i < args.length; i++) {
-				query += args[i];
+				query += " " + args[i];
 			}
 
-			say.export(query, null, 1, `audio/tts.wav`, (err) => {
+			say.export(query, `Microsoft ${client.speech} Desktop`, 0.75, `audio/tts.wav`, (err) => {
 				if (err) {
 					console.log(err);
 					return;

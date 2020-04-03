@@ -136,6 +136,12 @@ module.exports = {
 			message.channel.send({ files: ["./images/sword.jpg"] });
 			sentPicture = true;
 		}
+		if (message.content.toLowerCase().match("vector")) {
+			console.log();
+			console.log("vector");
+			message.channel.send({ files: ["./images/vector.jpg"] });
+			sentPicture = true;
+		}
 		if (message.content.toLowerCase().match("zhenyang")) {
 			console.log();
 			console.log("zhenyang");
