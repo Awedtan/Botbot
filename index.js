@@ -35,7 +35,7 @@ client.on("message", async message => {
 
 	if (message.content.startsWith(`${prefix}`)) {
 		console.log();
-		console.log("Received: " + message.content);
+		console.log(`Received from ${message.author.username} in ${message.channel.name}: ${message.content}`);
 
 		const args = message.content.split(" ");
 		const commandName = args.shift().toLowerCase();
