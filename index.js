@@ -4,8 +4,6 @@ const fs = require("fs");
 const Discord = require("discord.js");
 const Client = require('./Client');
 const client = new Client();
-const Say = require('say').Say;
-const say = new Say('win32');
 
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -17,7 +15,6 @@ for (const file of commandFiles) {
 console.log(client.commands);
 
 client.once("ready", () => {
-	say.getInstalledVoices((err, voices) => console.log(voices));
 	console.log("Ready!");
 });
 
@@ -31,6 +28,7 @@ client.once("disconnect", () => {
 
 client.on("message", async message => {
 	if (message.author.bot) return;
+	if (message.content.startsWith(";;")) return;
 	if (!message.content.startsWith(";") && client.commands.get(";image").execute(message, client)) return;
 
 	if (message.content.startsWith(`${prefix}`)) {

@@ -1,5 +1,6 @@
 {
-	"prefix": ";",
-	"token": "insert_token_here",
-	"youtube_api": "insert_api_here"
+	"prefix": "your_prefix_here",
+	"token": "your_token_here",
+	"youtube_api": "your_api_here",
+	"backup_api": "optional_api_here"
 }

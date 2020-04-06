@@ -15,6 +15,5 @@ module.exports = class extends Client {
 			key: "",
 			type : "video"
 		};
-		this.speech = "David";
 	}
 };

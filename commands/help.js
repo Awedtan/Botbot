@@ -15,8 +15,6 @@ module.exports = {
 						`Current prefix: \`${prefix}\`\n\n` +
 						`Music\n` +
 						`\`play\`, \`search\`, \`skip\`, \`stop\`, \`leave\`, \`remove\`, \`queue\`\n\n` +
-						`Misc\n` +
-						`\`speak\`, \`voice\`\n\n` +
 						`Use \`help [command]\` for more information about a command`
 					)
 				return message.channel.send(embed);
