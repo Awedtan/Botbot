@@ -9,7 +9,6 @@ module.exports = {
 		var sentPicture = false;
 
 		if (message.content.toLowerCase().match("aaa")) {
-			console.log();
 			console.log("aaa");
 			message.channel.send({ files: ["./images/aaa.jpg"] });
 			sentPicture = true;
@@ -28,37 +27,36 @@ module.exports = {
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("batman")) {
-			console.log();
 			console.log("batman");
 			message.channel.send({ files: ["./images/batman.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("boys")) {
-			console.log();
 			console.log("boys");
 			message.channel.send({ files: ["./images/boys.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("bruh")) {
-			console.log();
 			console.log("bruh");
 			message.channel.send({ files: ["./images/bruh.jpg"] });
 			sentPicture = true;
 		}
+		if (message.content.toLowerCase().match("connor")) {
+			console.log("connor");
+			message.channel.send({ files: ["./images/connor.jpg"] });
+			sentPicture = true;
+		}
 		if (message.content.toLowerCase().match("cool")) {
-			console.log();
 			console.log("cool");
 			message.channel.send({ files: ["./images/cool.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("dumb")) {
-			console.log();
 			console.log("dumb");
 			message.channel.send({ files: ["./images/dumb.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("eddy") || message.content.toLowerCase().match("edward")) {
-			console.log();
 			console.log("edward");
 			switch (Math.floor(Math.random() * 8)) {
 				case 0:
@@ -89,32 +87,27 @@ module.exports = {
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("elephant")) {
-			console.log();
 			console.log("elephant");
 			message.channel.send({ files: ["./images/elephant.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("fly")) {
-			console.log();
 			console.log("fly");
 			message.channel.send({ files: ["./images/edward6.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("gay") || message.content.toLowerCase().match("furry")) {
-			console.log();
 			console.log("gay");
 			message.channel.send({ files: ["./images/gay.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("janitor")) {
-			console.log();
 			console.log("janitor");
 			message.channel.send({ files: ["./images/janitor.jpg"] });
 			sentPicture = true;
 		}
 		for (let i = 0; i < args.length; i++) {
 			if (args[i] === "jon" || message.content.toLowerCase().match("jonathan") || message.content.toLowerCase().match("jonny")) {
-				console.log();
 				console.log("jonathan");
 				switch (Math.floor(Math.random() * 4)) {
 					case 0:
@@ -135,20 +128,17 @@ module.exports = {
 			}
 		}
 		if (message.content.toLowerCase().match("leaves")) {
-			console.log();
 			console.log("leaves");
 			message.channel.send({ files: ["./images/leaves.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("long")) {
-			console.log();
 			console.log("long");
 			message.channel.send({ files: ["./images/long.jpg"] });
 			sentPicture = true;
 		}
 		for (let i = 0; i < args.length; i++) {
 			if (args[i] === "mao" || message.content.toLowerCase().match("zedong")) {
-				console.log();
 				console.log("mao zedong");
 				message.channel.send({ files: ["./images/mao.jpg"] });
 				sentPicture = true;
@@ -157,9 +147,8 @@ module.exports = {
 		}
 		for (let i = 0; i < args.length; i++) {
 			if (args[i] === "max" || message.content.toLowerCase().match("maxy")) {
-				console.log();
 				console.log("max");
-				switch (Math.floor(Math.random() * 3)) {
+				switch (Math.floor(Math.random() * 4)) {
 					case 0:
 						message.channel.send({ files: ["./images/max.jpg"] });
 						break;
@@ -169,37 +158,40 @@ module.exports = {
 					case 2:
 						message.channel.send({ files: ["./images/max3.jpg"] });
 						break;
+					case 3:
+						message.channel.send({ files: ["./images/max4.jpg"] });
+						break;
 				}
 				sentPicture = true;
 				break;
 			}
 		}
 		if (message.content.toLowerCase().match("bessie")) {
-			console.log();
 			console.log("mcbessie");
 			message.channel.send({ files: ["./images/mcbessie.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("mistake")) {
-			console.log();
 			console.log("mistake");
 			message.channel.send({ files: ["./images/mistake.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("patriot")) {
-			console.log();
 			console.log("patriot");
 			message.channel.send({ files: ["./images/patriot.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("paul") || message.content.toLowerCase().match("menacing")) {
-			console.log();
 			console.log("paul");
 			message.channel.send({ files: ["./images/paul.jpg"] });
 			sentPicture = true;
 		}
+		if (message.content.toLowerCase().match("richard") || message.content.toLowerCase().match("ricard")) {
+			console.log("richard");
+			message.channel.send({ files: ["./images/richard.jpg"] });
+			sentPicture = true;
+		}
 		if (message.content.toLowerCase().match("ricky")) {
-			console.log();
 			console.log("ricky");
 			switch (Math.floor(Math.random() * 2)) {
 				case 0:
@@ -212,7 +204,6 @@ module.exports = {
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("sajon")) {
-			console.log();
 			console.log("sajon");
 			switch (Math.floor(Math.random() * 6)) {
 				case 0:
@@ -238,9 +229,8 @@ module.exports = {
 		}
 		for (let i = 0; i < args.length; i++) {
 			if (args[i] === "sam" || message.content.toLowerCase().match("samuel")) {
-				console.log();
 				console.log("samuel");
-				switch (Math.floor(Math.random() * 3)) {
+				switch (Math.floor(Math.random() * 4)) {
 					case 0:
 						message.channel.send({ files: ["./images/samuel.jpg"] });
 						break;
@@ -250,55 +240,50 @@ module.exports = {
 					case 2:
 						message.channel.send({ files: ["./images/samuel3.jpg"] });
 						break;
+					case 3:
+						message.channel.send({ files: ["./images/samuel4.jpg"] });
+						break;
 				}
 				sentPicture = true;
 				break;
 			}
 		}
 		if (message.content.toLowerCase().match("skeletor") || message.content.toLowerCase().match("skull") || message.content.toLowerCase().match("spook")) {
-			console.log();
 			console.log("skeletor");
 			message.channel.send({ files: ["./images/skeletor.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("slime")) {
-			console.log();
 			console.log("slime");
 			message.channel.send({ files: ["./images/slime.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("squad")) {
-			console.log();
 			console.log("squad");
 			message.channel.send({ files: ["./images/squad.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("stubby") || message.content.toLowerCase().match("sarah") || message.content.toLowerCase().match("miranda")) {
-			console.log();
 			console.log("stubby");
 			message.channel.send({ files: ["./images/stubby.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("sword")) {
-			console.log();
 			console.log("sword");
 			message.channel.send({ files: ["./images/sword.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("toucan") || ((message.content.toLowerCase().match("fruit") || message.content.toLowerCase().match("froot")) && message.content.toLowerCase().match("loop"))) {
-			console.log();
 			console.log("toucan");
 			message.channel.send({ files: ["./images/toucan.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("trash")) {
-			console.log();
 			console.log("trash");
 			message.channel.send({ files: ["./images/trash.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("vaseehar")) {
-			console.log();
 			console.log("vaseehar");
 			switch (Math.floor(Math.random() * 2)) {
 				case 0:
@@ -311,13 +296,11 @@ module.exports = {
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("vector")) {
-			console.log();
 			console.log("vector");
 			message.channel.send({ files: ["./images/vector.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("william")) {
-			console.log();
 			console.log("william");
 			switch (Math.floor(Math.random() * 5)) {
 				case 0:
@@ -338,14 +321,12 @@ module.exports = {
 			}
 			sentPicture = true;
 		}
-		if (message.content.toLowerCase().match("yah") || message.content.toLowerCase().match("hai")) {
-			console.log();
+		if (message.content.toLowerCase().match("yah") && message.content.toLowerCase().match("hai")) {
 			console.log("yah hai");
 			message.channel.send({ files: ["./images/yahhai.jpg"] });
 			sentPicture = true;
 		}
 		if (message.content.toLowerCase().match("zhen") || message.content.toLowerCase().match("yang")) {
-			console.log();
 			console.log("william");
 			switch (Math.floor(Math.random() * 2)) {
 				case 0:
