@@ -28,7 +28,6 @@ client.once("disconnect", () => {
 
 client.on("message", async message => {
 	if (message.author.bot) return;
-	if (message.content.startsWith(";;")) return;
 	if (!message.content.startsWith(";") && client.commands.get(";image").execute(message, client)) return;
 
 	if (message.content.startsWith(`${prefix}`)) {
