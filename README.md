@@ -2,9 +2,11 @@
 
 A 100% original discord.js bot
 
-Has music playing ~~and text-to-speech commands~~
+Has ~~music playing~~ ~~and text-to-speech commands~~
 
 TTS commands have been moved to https://github.com/Awedtan/TTSbot
+
+Music is not working, will fix
 
 # Installation
 
