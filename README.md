@@ -1,12 +1,12 @@
-# Botbot
+# Botbot (old, not working)
 
 A 100% original discord.js bot
 
-Has ~~music playing~~ ~~and text-to-speech commands~~
+Has ~~music playing~~ ~~and text-to-speech commands~~ absolutely nothing
 
 TTS commands have been moved to https://github.com/Awedtan/TTSbot
 
-Music is not working, will fix
+Music has been moved to https://github.com/Awedtan/Newbot
 
 # Installation
 
